@@ -1,3 +1,4 @@
+import os
 import gradio as gr
 
 def multiplicar_por_si_mismo(numero, veces):
@@ -13,11 +14,13 @@ with gr.Blocks() as demo:
     )
     boton = gr.Button("Calcular")
     resultado_output = gr.Number(label="Resultado")
-
+    
     boton.click(
         fn=multiplicar_por_si_mismo,
         inputs=[numero_input, veces_input],
         outputs=resultado_output
     )
 
-demo.launch()
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 7860))
+    demo.launch(server_name="0.0.0.0", server_port=port)
